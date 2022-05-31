@@ -30,7 +30,7 @@ String state_str; // state as a string ("off" or "on")
 int state; // state as an int (0 or 1)
 
 // pin setup
-int pin_min = 23;
+int pin_min = 22;
 int pin_max = 53;
 
 // comms timeout in seconds
@@ -61,8 +61,8 @@ void setup() {
 
   // setup relay pins
   for (int i = pin_min; i <= pin_max; i++) {
-    pinMode(pin, OUTPUT);
-    digitalWrite(pin, HIGH); // set state to off
+    pinMode(i, OUTPUT);
+    digitalWrite(i, HIGH); // set state to off
   }
 }
 
@@ -122,7 +122,7 @@ void loop() {
           state_str = cmd.substring(sep_ix + 1);
     
           // check pin is valid pin on Arduino Mega
-          if (pin < 23 || pin > 53) {
+          if (pin < pin_min || pin > pin_max) {
             ret = "ERROR: invalid pin number";
           }
           else {
